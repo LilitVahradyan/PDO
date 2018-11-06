@@ -28,18 +28,21 @@
 		</div>
 		<div class='card-body'>
 		
-			<form action="create.php"  method="post">
+			<form action="read.php"  method="post">
 				<div class="form-group">
 					<lable for='name'>Name</lable>
 					<input type="text" name="name"  class="form-control">
+					<span class="error">*<?= $nameErr; ?></span>
 				</div>
 				<div class="form-group">
 					<lable for='email'>Email</lable>
 					<input type="email" name="email" class="form-control">
+					<span class="error">*<?= $emailErr; ?></span>
 				</div>
 				<div class="form-group">
 					<lable for='phone'>Phone</lable>
 					<input type="text" name="phone"  class="form-control">
+					<span class="error">*<?= $phoneErr; ?></span>
 				</div>
 				<div class="form-group">
 					<button type='submit' class='btn btn-info' > Create person</button>
