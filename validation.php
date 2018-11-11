@@ -1,38 +1,38 @@
 <?php 
-	$name=$email=$phone = "";
 	
-	function dataValidation(){
-		if(empty($_POST['name'])){
-			$nameErr="Name is required!";
-		}else{
-			$name= test_input($_POST['name']);
+	function dataValidation($data){
+		$error = [];
+
+		if(empty($data['name'])){
+			$error['name'] =  "Name cant't be empty!";
+            return  $error;
+		}
 			
-			if(!preg_match("/^[a-zA-Z ]*$/",$name)){
-			$nameErr = "Only letters and white space allowed!";
-			}
+	   if(!preg_match("/^[a-zA-Z ]*$/",$data['name'])){
+			$error['onlyletters'] =  "Only letters and white space allowed!";
+            return  $error;
+		}
+	
+		if(empty($data['email'])){
+			$error['email'] = "Email is required";
+			return  $error;
 		}
 
-		if(empty($_POST['email'])){
-			$emailErr="Email is required"
-		}else{
-			$email = test_input($_POST['email']);
-
-			if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-				$emailErr = "Invalid email!";
-			}
+	    if(!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+			$error['filedemail'] = "Invalid email!";
+			return  $error;
 		}
-        
-        if(empty($_POST['phone'])){
-        	$phoneErr="Phone is requred!";
-        }else{
-        	$phone = test_input($_POST['phone']);
-
-        	if(!preg_match('/^\+?([0-9]{1,4})\)?[-. ]?([0-9]{10})$/', $phone){
-        		$phoneErr = "Enter a valid phone number!";
-        	}else{
-
-        	}
+		
+        if(empty($data['phone'])){
+        	$error['phone'] = "Phone is required!";
+        	return  $error;
         }
 
-	}
+       if(!preg_match('/^\+?([0-9]{1,4})\)?[-. ]?([0-9]{10})$/', $data['phone'])){
+        	$error['phonenum'] =  "Enter a valid phone number!";
+        	return  $error;
+       } 
+    
+    	return true;
+    } 
 ?>
